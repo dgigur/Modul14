@@ -55,7 +55,6 @@ class RegistrationState(StatesGroup):
 async def sing_up(message):
     await message.answer('Введите имя пользователя (только латинский алфавит):')
     await RegistrationState.username.set()
-    print(message.text)
 
 
 @dp.message_handler(state=RegistrationState.username)
@@ -69,12 +68,12 @@ async def set_username(message, state):
         await RegistrationState.username.set()
 
 
-
 @dp.message_handler(state=RegistrationState.email)
 async def set_email(message, state):
     await state.update_data(email=message.text)
     await message.answer('Введите свой возраст:')
     await RegistrationState.age.set()
+
 
 @dp.message_handler(state=RegistrationState.age)
 async def set_age(message, state):
